@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=650" />
+    <title>Covid Map</title>
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="slidercontainer">
+      <div id="slider"></div>
+      <div class="controls">
+        <span class="date"></span>
+      </div>
+    </div>
+    <div class="info hidden">
+      <h1 id="title">
+        Covid-19 Cases
+      </h1>
+      <small>
+        Source:
+        <a
+          href="https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/"
+          ><strong class="target">USA Facts</strong></a
+        >
+        &middot; By
+        <a href="https://twitter.com/msb5014" target="_blank">
+          <strong class="target">Mike Barry</strong>
+        </a>
+      </small>
+    </div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script
+      type="text/javascript"
+      src="http://d3js.org/queue.v1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://d3js.org/topojson.v1.min.js"
+    ></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

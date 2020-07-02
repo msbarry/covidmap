@@ -1,0 +1,240 @@
+body {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  max-width: 900px;
+  min-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 3em;
+}
+
+.hidden {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  color: steelBlue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.slidercontainer {
+  position: relative;
+}
+
+.controls {
+  position: absolute;
+  top: -5px;
+  right: 23.5%;
+  white-space: nowrap;
+}
+
+@media (min-width: 750px) {
+  .controls {
+    top: -15px;
+    right: 25%;
+  }
+  .controls .day {
+    margin-right: 15px;
+  }
+}
+
+.controls .day {
+  font-size: 24px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.togglecontainer {
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 10px;
+}
+
+.togglecontainer .buttons .button {
+  width: 4em;
+  border: solid 1px #ddd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  outline: none;
+}
+
+.togglecontainer .buttons .button:hover {
+  border-color: #ccc;
+  border-bottom-color: #bbb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  color: #bbb;
+}
+
+.togglecontainer .button {
+  background: #fff;
+  border: none;
+  border-radius: 3px;
+  border-bottom-color: #ccc;
+  color: #ddd;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0 -2px 0 0;
+  padding: 3px 8px;
+  white-space: nowrap;
+  float: left;
+}
+
+.togglecontainer button,
+.togglecontainer a,
+.togglecontainer button::-moz-focus-inner {
+  border: 0;
+  outline: 0;
+}
+
+.togglecontainer .buttons .button.active,
+.togglecontainer .buttons .button:active {
+  background: #f0f0f0;
+  border-color: #ccc;
+  border-top-color: #bbb;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  color: #222;
+  font-weight: 600;
+}
+
+.togglecontainer .buttons .button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.togglecontainer .buttons .button:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.togglecontainer .buttons .button:focus {
+  z-index: 3;
+}
+
+.togglecontainer .buttons .button.active {
+  z-index: 2;
+}
+
+.info {
+  padding: 0 50px;
+  text-align: right;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.info > * {
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.info strong {
+  font-weight: 500 !important;
+}
+
+.info #title,
+.info #title > * {
+  font-weight: 400;
+}
+
+@media (max-width: 700px) {
+  .info #title {
+    font-size: 1.5em;
+  }
+}
+
+.map {
+  text-align: center;
+  display: inline-block;
+}
+
+.map .state {
+  fill: #ccc;
+}
+
+.map .boundary {
+  fill: none;
+  stroke: black;
+  stroke-opacity: 0.3;
+  stroke-width: 0.5px;
+}
+
+.map .label {
+  text-anchor: middle;
+  font-size: 10px;
+}
+
+.map .label.foreground {
+  paint-order: stroke;
+  stroke: white;
+  stroke-width: 1px;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+}
+
+.map .shadow {
+  fill: white;
+  stroke: white;
+  stroke-width: 1px;
+}
+
+.map .state {
+  transition: fill 75ms ease;
+}
+
+.map .connector {
+  stroke: black;
+  stroke-opacity: 0.4;
+}
+
+.map .tapcontainer .left,
+.map .tapcontainer .right {
+  opacity: 0;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.map .tapcontainer circle {
+  fill: #eee;
+  transition: fill 100ms ease;
+}
+
+.map .tapcontainer path {
+  stroke: white;
+  stroke-width: 2px;
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.map .tapcontainer:active circle {
+  fill: #ddd;
+}
+
+#slider {
+  text-align: right;
+  margin-top: -30px;
+}
+
+#slider circle.currentDay {
+  fill: brown;
+  stroke: none;
+}
+
+#slider text.currentDay {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#slider .touchTarget {
+  fill-opacity: 0;
+  cursor: pointer;
+}
+
+#slider .source {
+  font-size: 10px;
+  fill: #888;
+}
