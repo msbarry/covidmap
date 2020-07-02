@@ -31,7 +31,7 @@ const makeSlider = (function () {
 
   var MS_AT_MIN_DAY = 1000;
   var MS_AT_MAX_DAY = 2000;
-  var MS_AT_EACH_DAY = 150;
+  var MS_AT_EACH_DAY = 75;
 
   function renderPlay(selection) {
     var size = PLAY_PAUSE_SIZE;
@@ -249,13 +249,16 @@ Promise.all([
   var width = 960,
     height = 600;
   var color = d3
-    .scaleThreshold()
-    .domain([1, 10, 30])
+    .scaleLinear()
+    .domain([1, 10, 20, 40, 100])
+    .interpolate(d3.interpolateLab)
+    .clamp(true)
     .range([
       "rgb(116,197,124)",
       "rgb(238,213,59)",
       "rgb(228,169,91)",
       "rgb(209,40,70)",
+      "hsl(349, 68%, 20%)",
     ]);
 
   var svg = d3
