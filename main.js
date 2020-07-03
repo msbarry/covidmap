@@ -97,6 +97,8 @@ const makeSlider = (function () {
     persist = () => {},
     width: outerWidth = 800,
     height: outerHeight = 70,
+    dayValues,
+    color,
   }) {
     let day = dayRange[0];
     var margin = {
@@ -111,7 +113,7 @@ const makeSlider = (function () {
 
     var [minDay, maxDay] = dayRange;
 
-    var scale = d3.scaleLinear().domain(dayRange).rangeRound([0, width]);
+    var scale = d3.scaleLinear().domain(dayRange).range([0, width]);
 
     var invertScale = d3
       .scaleLinear()
@@ -145,11 +147,6 @@ const makeSlider = (function () {
       .on("end", persist)
       .container(container.node())(svg);
 
-    var allMarks = d3
-      .axisBottom(scale)
-      .tickFormat(() => "")
-      .ticks(maxDay - minDay)
-      .tickSize(3);
     var months = d3
       .axisBottom(
         d3
@@ -159,8 +156,18 @@ const makeSlider = (function () {
       )
       .ticks(d3.utcMonth)
       .tickFormat(d3.utcFormat("%b %e"));
-    svg.append("g").call(allMarks);
-    svg.append("g").call(months);
+    svg
+      .selectAll("rect")
+      .data(dayValues)
+      .enter()
+      .append("rect")
+      .attr("width", width / dayValues.length)
+      .attr("height", 6)
+      .attr("x", (d, i) => scale(i + minDay))
+      .attr("y", -3)
+      .attr("stroke", "none")
+      .attr("fill", color);
+    svg.append("g").attr("transform", "translate(0,-3)").call(months);
 
     var slider = svg.append("circle").attr("class", "currentDay").attr("r", 5);
 
@@ -341,6 +348,14 @@ Promise.all([
     d3.select(".date").text(dayToLongDateStr(day));
   }
 
+  const totalPop = d3.sum(population, (p) => Number(p["population"]));
+  const dayValues = days.slice(7).map((day) => {
+    var start = dayToDateStr(day - 7);
+    var end = dayToDateStr(day);
+    const total = d3.sum(cases, (d) => Number(d[end]) - Number(d[start]));
+    return (100000 * total) / totalPop / 7;
+  });
+
   const slider = makeSlider({
     element: "#slider",
     onDayChange: setDay,
@@ -348,6 +363,8 @@ Promise.all([
     width: 600,
     height: 70,
     dayRange: d3.extent(days.slice(7)),
+    dayValues,
+    color,
   });
   setDay(d3.max(days));
 

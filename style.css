@@ -230,3 +230,7 @@ a:hover {
   font-size: 10px;
   fill: #888;
 }
+
+#slider path {
+  stroke: none;
+}
