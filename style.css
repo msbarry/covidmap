@@ -27,18 +27,10 @@ a:hover {
 .controls {
   position: absolute;
   top: -5px;
-  right: 23.5%;
+  right: 35%;
+  transform: translateX(50%);
   white-space: nowrap;
-}
-
-@media (min-width: 750px) {
-  .controls {
-    top: -15px;
-    right: 25%;
-  }
-  .controls .day {
-    margin-right: 15px;
-  }
+  font-size: 20px;
 }
 
 .controls .day {
@@ -216,7 +208,7 @@ a:hover {
 
 #slider {
   text-align: right;
-  margin-top: -30px;
+  margin-top: -40px;
 }
 
 #slider circle.currentDay {

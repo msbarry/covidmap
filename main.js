@@ -18,6 +18,13 @@ function dayToDateStr(d) {
     date.getUTCFullYear() - 2000,
   ].join("/");
 }
+function dayToLongDateStr(d) {
+  var date = new Date(d * 1000 * 60 * 60 * 24);
+  return date.toLocaleDateString(undefined, {
+    timeZone: "UTC",
+    dateStyle: "long",
+  });
+}
 
 const makeSlider = (function () {
   var PLAY_PAUSE_SIZE = 20;
@@ -247,7 +254,13 @@ Promise.all([
     countyIdToCases[d["countyFIPS"]] = d;
   });
   var width = 960,
-    height = 600;
+    height = 600,
+    padding = {
+      top: 20,
+      left: -60,
+      bottom: 20,
+      right: 20,
+    };
   var color = d3
     .scaleLinear()
     .domain([1, 10, 20, 40, 100])
@@ -266,9 +279,17 @@ Promise.all([
     .append("svg")
     .attr("viewBox", `0 0 ${width} ${height}`)
     .attr("width", "100%")
-    .attr("height", "auto")
+    .style("height", "auto")
     .attr("preserveAspectRatio", "xMinYMin meet");
-  var path = d3.geoPath(d3.geoAlbersUsa());
+  var path = d3.geoPath(
+    d3.geoAlbersUsa().fitExtent(
+      [
+        [padding.left, padding.top],
+        [width - padding.right, height - padding.top],
+      ],
+      topojson.feature(us, us.objects.states)
+    )
+  );
   var counties = svg
     .append("g")
     .attr("class", "county")
@@ -317,7 +338,7 @@ Promise.all([
           )
         : "rgb(116,197,124)";
     });
-    d3.select(".date").text(dayToDateStr(day));
+    d3.select(".date").text(dayToLongDateStr(day));
   }
 
   const slider = makeSlider({
