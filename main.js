@@ -161,7 +161,7 @@ const makeSlider = (function () {
       .data(dayValues)
       .enter()
       .append("rect")
-      .attr("width", width / dayValues.length)
+      .attr("width", 1 + width / dayValues.length)
       .attr("height", 6)
       .attr("x", (d, i) => scale(i + minDay))
       .attr("y", -3)

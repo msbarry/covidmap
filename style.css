@@ -234,3 +234,7 @@ a:hover {
 #slider path {
   stroke: none;
 }
+
+svg {
+  shape-rendering: crispEdges;
+}
